@@ -54,4 +54,22 @@ public class JsonGeoReferenceTest {
 
         assertEquals(expectedLng, geoReference.getLng());
     }
+
+    @Test
+    public void that_is_valid_returns_true() {
+
+        final JsonGeoReference geoReference = new JsonGeoReference();
+        geoReference.setLat(1.0);
+        geoReference.setLng(1.0);
+
+        assertTrue(geoReference.isValid());
+    }
+
+    @Test
+    public void that_is_valid_returns_false_for_missing_coordinates() {
+
+        final JsonGeoReference geoReference = new JsonGeoReference();
+
+        assertFalse(geoReference.isValid());
+    }
 }
