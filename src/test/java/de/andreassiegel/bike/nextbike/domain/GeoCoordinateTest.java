@@ -5,9 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 /**
  * Geo Coordinate POJO test.
@@ -108,6 +106,35 @@ public class GeoCoordinateTest {
         assertEquals(expectedJsonString, jsonString);
     }
 
+    @Test
+    public void that_json_serialization_excludes_valid() throws JsonProcessingException {
+
+        GeoCoordinate geoCoordinate = new GeoCoordinate(1.0, 2.0);
+
+        String jsonString = objectMapper.writeValueAsString(geoCoordinate);
+
+        assertFalse(jsonString.contains("valid"));
+    }
+
     // endregion
 
+    // region Self-validation
+
+    @Test
+    public void that_is_valid_returns_true() {
+
+        final GeoCoordinate coordinate = new GeoCoordinate(1.0, 1.0);
+
+        assertTrue(coordinate.isValid());
+    }
+
+    @Test
+    public void that_is_valid_returns_false_for_missing_coordinates() {
+
+        final GeoCoordinate geoReference = new GeoCoordinate(null, null);
+
+        assertFalse(geoReference.isValid());
+    }
+
+    // endregion
 }
