@@ -16,6 +16,11 @@ public abstract class Validated {
 
     private static final Validator validator = initValidator();
 
+    /**
+     * Checks if the object instance violates any constraints.
+     *
+     * @return {@code true} if the object is valid and does not violate any constraints, {@code false} otherwise
+     */
     @JsonIgnore
     public boolean isValid() {
 
