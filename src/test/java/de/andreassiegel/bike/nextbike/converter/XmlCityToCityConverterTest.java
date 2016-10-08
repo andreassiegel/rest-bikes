@@ -115,17 +115,12 @@ public class XmlCityToCityConverterTest {
         assertEquals(expectedCity, city);
     }
 
-    @Test
-    public void that_convert_succeeds_for_null() {
+    @Test(expected = IllegalArgumentException.class)
+    public void that_convert_fails_for_null() {
 
         final XmlCity xmlCity = null;
 
-        final City expectedCity = City.builder()
-            .build();
-
-        final City city = converter.convert(xmlCity);
-
-        assertEquals(expectedCity, city);
+        converter.convert(xmlCity);
     }
 
     // endregion

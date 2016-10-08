@@ -17,6 +17,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistrar;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * Converter component for conversion from {@link XmlCity} to {@link City}.
@@ -39,19 +40,16 @@ public class XmlCityToCityConverter implements Converter<XmlCity, City>, Formatt
     @Override
     public City convert(XmlCity city) {
 
-        City.CityBuilder builder = City.builder();
+        Assert.notNull(city, "source may not be null");
 
-        if (city != null) {
-            builder
-                .id(city.getUid())
-                .name(city.getName())
-                .alias(city.getAlias())
-                .bounds(parseBoundsFromJson(city.getBounds()))
-                .stations(collectionConverter.convert(city.getPlaces(), XmlPlace.class, Station.class))
-                .location(getGeoCoordinateFromXmlCity(city));
-        }
-
-        return builder.build();
+        return City.builder()
+            .id(city.getUid())
+            .name(city.getName())
+            .alias(city.getAlias())
+            .bounds(parseBoundsFromJson(city.getBounds()))
+            .stations(collectionConverter.convert(city.getPlaces(), XmlPlace.class, Station.class))
+            .location(getGeoCoordinateFromXmlCity(city))
+            .build();
     }
 
     protected Bounds parseBoundsFromJson(String input) {
