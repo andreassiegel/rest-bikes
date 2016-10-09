@@ -2,7 +2,7 @@ language: java
 jdk:
   - oraclejdk8
 
-script: mvn test
+script: mvn test -DskipTests
 
 after_success:
   - mvn clean test jacoco:report coveralls:report
