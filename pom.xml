@@ -210,6 +210,10 @@
                 <version>4.3.0</version>
                 <configuration>
                     <repoToken>${env.COVERALLS_REPO_TOKEN}</repoToken>
+                    <jacocoReports>
+                        <param>${project.reporting.outputDirectory}/jacoco-ut</param>
+                        <param>${project.reporting.outputDirectory}/jacoco-it</param>
+                    </jacocoReports>
                 </configuration>
             </plugin>
             <plugin>
