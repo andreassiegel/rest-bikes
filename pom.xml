@@ -99,18 +99,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.eluder.coveralls</groupId>
-                <artifactId>coveralls-maven-plugin</artifactId>
-                <version>4.3.0</version>
-                <configuration>
-                    <repoToken>${env.COVERALLS_REPO_TOKEN}</repoToken>
-                    <jacocoReports>
-                        <param>${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml</param>
-                        <param>${project.reporting.outputDirectory}/jacoco-it/jacoco.xml</param>
-                    </jacocoReports>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.7.7.201606060606</version>
@@ -255,6 +243,18 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+                <version>4.3.0</version>
+                <configuration>
+                    <repoToken>${env.COVERALLS_REPO_TOKEN}</repoToken>
+                    <jacocoReports>
+                        <param>${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml</param>
+                        <param>${project.reporting.outputDirectory}/jacoco-it/jacoco.xml</param>
+                    </jacocoReports>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>com.github.ekryd.sortpom</groupId>
                 <artifactId>sortpom-maven-plugin</artifactId>
                 <version>2.5.0</version>
@@ -267,7 +267,6 @@
                     <sortProperties>true</sortProperties>
                     <keepBlankLines>true</keepBlankLines>
                     <sortDependencies>scope,artifactId</sortDependencies>
-                    <sortPlugins>artifactId</sortPlugins>
                 </configuration>
                 <executions>
                     <execution>
