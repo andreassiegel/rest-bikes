@@ -92,16 +92,28 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.3.0</version>
                 <configuration>
                     <repoToken>${env.COVERALLS_REPO_TOKEN}</repoToken>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.13</version>
+                <executions>
+                    <!-- Even thought failsafe was specifically designed for integration tests it will not bind to the integration test by default. -->
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <!-- Failure reporting actually occurs under verify, if you were to skip this phase the build would continue even with failures. This is because
+              integration tests are designed to run in parallel -->
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -150,6 +162,10 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
