@@ -121,7 +121,6 @@ public class XmlCountryToCompanyConverterTest {
     }
 
     @Test
-    @Ignore
     public void that_convert_succeeds_for_empty() {
 
         final XmlCountry xmlCountry = new XmlCountry();

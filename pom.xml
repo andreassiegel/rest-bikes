@@ -19,7 +19,6 @@
     <description>REST Service providing information about bikes</description>
 
     <properties>
-
         <build.profile.id>dev</build.profile.id>
         <jacoco.it.execution.data.file>${project.build.directory}/coverage-reports/jacoco-it.exec</jacoco.it.execution.data.file>
         <jacoco.ut.execution.data.file>${project.build.directory}/coverage-reports/jacoco-ut.exec</jacoco.ut.execution.data.file>
@@ -30,6 +29,7 @@
         <!-- Only unit tests are run by default. -->
         <skip.integration.tests>true</skip.integration.tests>
         <skip.unit.tests>false</skip.unit.tests>
+        <surefireArgLine></surefireArgLine>
     </properties>
 
     <dependencies>
@@ -98,6 +98,18 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+                <version>4.3.0</version>
+                <configuration>
+                    <repoToken>${env.COVERALLS_REPO_TOKEN}</repoToken>
+                    <jacocoReports>
+                        <param>${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml</param>
+                        <param>${project.reporting.outputDirectory}/jacoco-it/jacoco.xml</param>
+                    </jacocoReports>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -240,18 +252,6 @@
                         <exclude>**/IT*.java</exclude>
                         <exclude>**/*IT.java</exclude>
                     </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.eluder.coveralls</groupId>
-                <artifactId>coveralls-maven-plugin</artifactId>
-                <version>4.3.0</version>
-                <configuration>
-                    <repoToken>${env.COVERALLS_REPO_TOKEN}</repoToken>
-                    <jacocoReports>
-                        <param>${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml</param>
-                        <param>${project.reporting.outputDirectory}/jacoco-it/jacoco.xml</param>
-                    </jacocoReports>
                 </configuration>
             </plugin>
             <plugin>

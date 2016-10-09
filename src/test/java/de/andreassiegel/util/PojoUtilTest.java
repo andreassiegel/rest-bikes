@@ -34,7 +34,6 @@ public class PojoUtilTest {
     // region anyFieldSet()
 
     @Test
-    @Ignore
     public void that_any_field_set_returns_false_for_empty() {
 
         final XmlCountry xmlCountry = new XmlCountry();
@@ -43,7 +42,6 @@ public class PojoUtilTest {
     }
 
     @Test
-    @Ignore
     public void that_any_field_set_returns_false_for_empty_cities_collection() {
 
         final XmlCountry xmlCountry = new XmlCountry();
