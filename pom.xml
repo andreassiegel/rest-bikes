@@ -22,7 +22,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <argLine></argLine>
+        <surefire.argLine></surefire.argLine>
     </properties>
 
     <dependencies>
@@ -100,7 +100,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.18.1</version>
                 <configuration>
-                    <argLine>${surefireArgLine} -Xmx256m</argLine>
+                    <argLine>${surefire.argLine} -Xmx256m</argLine>
                     <!-- Force alphabetical order to have a reproducible build -->
                     <runOrder>alphabetical</runOrder>
                 </configuration>
@@ -117,7 +117,7 @@
                         </goals>
                         <configuration>
                             <destFile>${project.build.directory}/coverage-reports/jacoco.exec</destFile>
-                            <propertyName>surefireArgLine</propertyName>
+                            <propertyName>surefire.argLine</propertyName>
                         </configuration>
                     </execution>
                     <execution>
