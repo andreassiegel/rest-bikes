@@ -1,6 +1,7 @@
 package de.andreassiegel.util;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.Collection;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,17 +25,22 @@ public class PojoUtil {
 
         notNull(object, "object may not be null");
 
+        log.debug("Checking object {} for set fields...", object);
+
         for (Field field : object.getClass()
             .getDeclaredFields()) {
-            field.setAccessible(true);
-            Object value = null;
-            try {
-                value = field.get(object);
-            } catch (IllegalAccessException e) {
-                log.warn("Error accessing field {} of object {}: {}", field, object, e.toString());
-            }
-            if ((value != null && !(value instanceof Collection)) || value != null && !((Collection) value).isEmpty()) {
-                return true;
+            if (!Modifier.isStatic(field.getModifiers())) {
+                field.setAccessible(true);
+                Object value = null;
+                try {
+                    value = field.get(object);
+                    log.debug("Field {} has value {}", field, value);
+                } catch (IllegalAccessException e) {
+                    log.warn("Error accessing field {} of object {}: {}", field, object, e.toString());
+                }
+                if ((value != null && !(value instanceof Collection)) || value != null && !((Collection) value).isEmpty()) {
+                    return true;
+                }
             }
         }
 
