@@ -184,5 +184,15 @@ public class XmlCityToCityConverterTest {
         assertNull(geoCoordinate);
     }
 
+    @Test
+    public void that_get_geo_coordinate_returns_null_for_null() {
+
+        final XmlCity xmlCity = null;
+
+        GeoCoordinate geoCoordinate = converter.getGeoCoordinateFromXmlCity(xmlCity);
+
+        assertNull(geoCoordinate);
+    }
+
     // endregion
 }

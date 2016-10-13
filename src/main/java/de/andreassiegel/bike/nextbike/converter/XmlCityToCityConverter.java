@@ -67,7 +67,7 @@ public class XmlCityToCityConverter implements Converter<XmlCity, City>, Formatt
 
     protected GeoCoordinate getGeoCoordinateFromXmlCity(XmlCity city) {
 
-        if (city.getLat() == null || city.getLng() == null) {
+        if (city == null || city.getLat() == null || city.getLng() == null) {
             return null;
         }
 
